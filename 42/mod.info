@@ -1,0 +1,7 @@
+name=Jack of Some Trades
+id=JOST
+modversion=0.1.0.0
+description=Ties trade and crafting skills to the traits and profession picked at character creation. Pips in a skill set both a starting level (0 pips=0, 1=3, 2=5, 3=7, 4+=9) and a max level cap (0 pips=3, 1=5, 2=7, 3=9, 4+=10). Taking even 1 point in a linked skill (e.g. Cooking/Butchering, Blacksmithing/Welding) raises the paired skill's cap by 1. Combat, running, sneaking, and other physical/agility skills are unaffected -- only trade/crafting skills (plus Maintenance) are capped. Built for Project Zomboid Build 42 multiplayer, where every character otherwise ends up maxing every craft skill regardless of backstory.
+poster=poster.png
+versionMin=42.0
+authors=5tac3

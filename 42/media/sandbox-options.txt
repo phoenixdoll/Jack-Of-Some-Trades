@@ -1,0 +1,118 @@
+VERSION = 1,
+
+
+option JOST.Enabled
+{
+    type = boolean,
+    default = true,
+    page = JOST,
+    translation = JOST_Enabled,
+}
+
+option JOST.SynergyEnabled
+{
+    type = boolean,
+    default = true,
+    page = JOST,
+    translation = JOST_SynergyEnabled,
+}
+
+option JOST.StartLevel0Pips
+{
+    type = integer,
+    min = 0,
+    max = 10,
+    default = 0,
+    page = JOST,
+    translation = JOST_StartLevel0Pips,
+}
+
+option JOST.StartLevel1Pip
+{
+    type = integer,
+    min = 0,
+    max = 10,
+    default = 3,
+    page = JOST,
+    translation = JOST_StartLevel1Pip,
+}
+
+option JOST.StartLevel2Pips
+{
+    type = integer,
+    min = 0,
+    max = 10,
+    default = 5,
+    page = JOST,
+    translation = JOST_StartLevel2Pips,
+}
+
+option JOST.StartLevel3Pips
+{
+    type = integer,
+    min = 0,
+    max = 10,
+    default = 7,
+    page = JOST,
+    translation = JOST_StartLevel3Pips,
+}
+
+option JOST.StartLevel4PlusPips
+{
+    type = integer,
+    min = 0,
+    max = 10,
+    default = 9,
+    page = JOST,
+    translation = JOST_StartLevel4PlusPips,
+}
+
+option JOST.BaseCap0Pips
+{
+    type = integer,
+    min = 0,
+    max = 10,
+    default = 3,
+    page = JOST,
+    translation = JOST_BaseCap0Pips,
+}
+
+option JOST.BaseCap1Pip
+{
+    type = integer,
+    min = 0,
+    max = 10,
+    default = 5,
+    page = JOST,
+    translation = JOST_BaseCap1Pip,
+}
+
+option JOST.BaseCap2Pips
+{
+    type = integer,
+    min = 0,
+    max = 10,
+    default = 7,
+    page = JOST,
+    translation = JOST_BaseCap2Pips,
+}
+
+option JOST.BaseCap3Pips
+{
+    type = integer,
+    min = 0,
+    max = 10,
+    default = 9,
+    page = JOST,
+    translation = JOST_BaseCap3Pips,
+}
+
+option JOST.BaseCap4PlusPips
+{
+    type = integer,
+    min = 0,
+    max = 10,
+    default = 10,
+    page = JOST,
+    translation = JOST_BaseCap4PlusPips,
+}
