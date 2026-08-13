@@ -1,0 +1,13 @@
+{
+    "UI_trait_JOST_BoostedTraining": "Experienced",
+    "UI_trait_JOST_BoostedTraining_Desc": "DOES NOT AFFECT COMBAT AND AGILITY SKILLS. A stronger head start. Skills you invested in during character creation begin higher than normal: 1 point starts at level 3, 2 points at level 5, 3 points at level 7, 4+ points at level 9. This never changes your skill cap, only how much of it you start with. Everyone on this server starts with a skill boost, this is just a bigger skill boost. The default boosts are 1 pip = 2 in game, 2 pips = 4 in game, 3 pips = 6 in game, 4+ pips = 7 in game.",
+
+    "UI_trait_JOST_NormalTraining": "Self Taught",
+    "UI_trait_JOST_NormalTraining_Desc": "DOES NOT AFFECT COMBAT AND AGILITY SKILLS. No head start. Removes the skill boost everyone gets by defualt on this server, and replaces it with the vanilla behavior. Skills you invested in during character creation begin at exactly that many levels: 1 point starts at level 1, 2 points at level 2, and so on. This never changes your skill cap, only how much of it you start with. If you do not select this skill the default boosts are 1 pip = 2 in game, 2 pips = 4 in game, 3 pips = 6 in game, 4+ pips = 7 in game.",
+
+    "UI_trait_JOST_HalfTraining": "Unfinished Education",
+    "UI_trait_JOST_HalfTraining_Desc": "DOES NOT AFFECT COMBAT AND AGILITY SKILLS. Start with less skills than you select at character creation! Skills you invested in during character creation begin at half that level, rounded down: 1 pip will be 0 when you enter play. 2 pips starts at level 1 in game, 4 pips in character creation is level 2 in game, and so on. This never changes your skill cap, only how much of it you start with. The skill cap is calculated based on pips at character creation, so this does not affect the skill cap.",
+
+    "UI_trait_JOST_NoTraining": "Blank Slate",
+    "UI_trait_JOST_NoTraining_Desc": "DOES NOT AFFECT COMBAT AND AGILITY SKILLS. All skills will be level 0 when you enter play, regardless of how many pips you select in character creation. Your skill cap is still set by what you picked during character creation and you will get any boosts associated with it, you just have to earn every level of it yourself. Your skill cap will be calculated based on the pips at character creation, so this does not affect the skill cap."
+}

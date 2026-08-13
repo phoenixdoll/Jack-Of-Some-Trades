@@ -1,0 +1,57 @@
+/*
+    Jack of Some Trades - training-style traits.
+
+    These don't grant any XPBoosts themselves -- they don't touch pips at
+    all. They only select which of JOST's several pips->starting-level
+    tables applies (see JOST_SkillDefs.lua); the skill CAP is always
+    computed from a character's actual pips regardless of which (if any)
+    of these is picked, per design. Mutually exclusive with each other:
+    picking none gives the default (weaker) table.
+
+*/
+module JOST
+{
+    character_trait_definition JOST:BoostedTraining
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = JOST:BoostedTraining,
+        Cost = 2,
+        UIName = UI_trait_JOST_BoostedTraining,
+        UIDescription = UI_trait_JOST_BoostedTraining_Desc,
+        MutuallyExclusiveTraits = JOST:NormalTraining;JOST:HalfTraining;JOST:NoTraining,
+    }
+
+    character_trait_definition JOST:NormalTraining
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = JOST:NormalTraining,
+        Cost = -2,
+        UIName = UI_trait_JOST_NormalTraining,
+        UIDescription = UI_trait_JOST_NormalTraining_Desc,
+        MutuallyExclusiveTraits = JOST:BoostedTraining;JOST:HalfTraining;JOST:NoTraining,
+    }
+
+    character_trait_definition JOST:HalfTraining
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = JOST:HalfTraining,
+        Cost = -4,
+        UIName = UI_trait_JOST_HalfTraining,
+        UIDescription = UI_trait_JOST_HalfTraining_Desc,
+        MutuallyExclusiveTraits = JOST:BoostedTraining;JOST:NormalTraining;JOST:NoTraining,
+    }
+
+    character_trait_definition JOST:NoTraining
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = JOST:NoTraining,
+        Cost = -6,
+        UIName = UI_trait_JOST_NoTraining,
+        UIDescription = UI_trait_JOST_NoTraining_Desc,
+        MutuallyExclusiveTraits = JOST:BoostedTraining;JOST:NormalTraining;JOST:HalfTraining,
+    }
+}

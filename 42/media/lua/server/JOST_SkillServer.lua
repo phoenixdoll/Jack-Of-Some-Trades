@@ -50,9 +50,23 @@ end
     profession that were actually chosen, compute pips/caps/start levels
     from them, and grant the starting levels.
 
-    Starting levels only ever RAISE a skill, never lower it -- if this mod
-    is added to a server with already-playing characters, their genuinely
-    earned progress is never reset down to the formula-derived start level.
+    Under "default" training mode (no training trait picked -- the only
+    mode an already-existing character can be in, since a training trait
+    can only be chosen at character creation), starting levels only ever
+    RAISE a skill, never lower it: if this mod is added to a server with
+    already-playing characters, their genuinely earned progress is never
+    reset down to the formula-derived start level.
+
+    Under any explicitly-picked training mode (boosted/normal/half/none),
+    the level is instead SET exactly, in either direction. Picking a
+    training trait only ever happens on a brand-new life with nothing
+    earned yet to protect, and Unfinished Education / Blank Slate
+    specifically need to be able to pull a skill DOWN below whatever
+    vanilla's own inherent starting bump from profession/trait pips already
+    granted (confirmed live: picking a profession alone already starts a
+    character above level 0 in its relevant skills, before this mod ever
+    runs) -- otherwise "you don't start off with the skills" never actually
+    holds for those two traits.
 ]]
 local function initializeCharacter(player)
     local data = getModData(player)
@@ -91,20 +105,52 @@ local function initializeCharacter(player)
         profession = prof
     end
 
-    --[[ Which training mode applies: check the stringified trait names
-    (already proven correct via :getName(), see above) against
-    SkillDefs.TRAINING_TRAIT_IDS. "default" if none of the four training
-    traits is present. Logged explicitly (not just inferred from the
-    startLevel numbers) because the exact string :getName() returns for a
-    JOST:-namespaced custom trait hasn't been confirmed live yet -- if
-    detection is silently failing, this print is what will show it. ]]
-    local trainingMode = "default"
+    --[[ Which training mode applies: use player:hasTrait() against the real
+    registered CharacterTrait object, the same way vanilla itself always
+    calls hasTrait() (e.g. client/BuildingObjects/TimedActions/
+    ISBuildAction.lua:269 `character:hasTrait(CharacterTrait.HANDY)`,
+    shared/Foraging/forageSystem.lua:1719 `_character:hasTrait(characterTrait)`
+    where characterTrait comes from CharacterTrait.get(...)) -- always a real
+    object, never a plain string. This replaces an earlier approach that
+    compared traitObj:getName() strings against SkillDefs.TRAINING_TRAIT_IDS,
+    which depended on assuming the exact string format :getName() returns
+    for a custom JOST:-namespaced trait -- never actually confirmed live, so
+    switched to the type-safe check instead of relying on that guess.
+    JOST.traits (the bare-name-keyed table of registered CharacterTrait
+    objects) is a global set by media/registries.lua, which runs before any
+    Lua/script content loads, so it's guaranteed populated here.
+
+    These traits do use MutuallyExclusiveTraits (see JOST_traits.txt) so the
+    character-creation screen should already stop a player picking more than
+    one. Checked here in a fixed, most-conservative-wins order ("none" >
+    "half" > "normal" > "boosted") anyway -- cheap defense-in-depth against a
+    multi-pick reaching this code some other way (e.g. debug/admin trait
+    grants bypassing the creation screen), so it can never be gamed for a
+    better outcome than the worst picked trait alone would give. ]]
+    local MODE_PRIORITY = { "none", "half", "normal", "boosted" }
+    local pickedModes = {}
     for modeKey, traitId in pairs(SkillDefs.TRAINING_TRAIT_IDS) do
-        for _, name in ipairs(traitNames) do
-            if name == traitId then
-                trainingMode = modeKey
+        local bareName = traitId:match("^JOST:(.+)$")
+        local traitObj = bareName and JOST and JOST.traits and JOST.traits[bareName]
+        if traitObj then
+            local okHas, has = pcall(function() return player:hasTrait(traitObj) end)
+            if okHas and has then
+                pickedModes[modeKey] = true
             end
         end
+    end
+    local trainingMode = "default"
+    for _, modeKey in ipairs(MODE_PRIORITY) do
+        if pickedModes[modeKey] then
+            trainingMode = modeKey
+            break
+        end
+    end
+    local pickedCount = 0
+    for _ in pairs(pickedModes) do pickedCount = pickedCount + 1 end
+    if pickedCount > 1 then
+        print("[JOST] WARNING: " .. tostring(player:getUsername()) ..
+            " has more than one training trait picked -- falling back to the most conservative, trainingMode=" .. trainingMode)
     end
 
     local snapshot = SkillCalc.computeSnapshot(traitObjects, profession, trainingMode)
@@ -126,11 +172,15 @@ local function initializeCharacter(player)
 
     for _, perk in ipairs(SkillDefs.TRADE_SKILLS) do
         local startLevel = snapshot.startLevels[perk]
-        if startLevel and startLevel > 0 then
+        if startLevel ~= nil then
             local perkType = Perks.FromString(perk)
             if perkType then
                 local currentLevel = player:getPerkLevel(perkType)
-                if currentLevel < startLevel then
+                if trainingMode == "default" then
+                    if currentLevel < startLevel then
+                        setPerkLevel(player, perkType, startLevel)
+                    end
+                elseif currentLevel ~= startLevel then
                     setPerkLevel(player, perkType, startLevel)
                 end
             end

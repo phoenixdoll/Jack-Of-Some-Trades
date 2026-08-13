@@ -1,0 +1,39 @@
+{
+    "Sandbox_JOST": "Jack of Some Trades",
+
+    "Sandbox_JOST_Enabled": "Enabled",
+    "Sandbox_JOST_Enabled_tooltip": "Master toggle. When off, no starting-level grants or cap enforcement happen at all.",
+
+    "Sandbox_JOST_SynergyEnabled": "Linked-Skill Synergy",
+    "Sandbox_JOST_SynergyEnabled_tooltip": "When on, a related skill with at least 1 pip grants this skill's cap a flat +1 (see the mod's linked-skill graph). When off, only a skill's own pips affect its cap.",
+
+    "Sandbox_JOST_StartLevel0Pips": "Starting Level: 0 Pips",
+    "Sandbox_JOST_StartLevel0Pips_tooltip": "Starting level granted for a trade skill with no relevant trait/profession investment. <LINE> Recommended: 0",
+
+    "Sandbox_JOST_StartLevel1Pip": "Starting Level: 1 Pip",
+    "Sandbox_JOST_StartLevel1Pip_tooltip": "Starting level granted for a trade skill with 1 pip of trait/profession investment. <LINE> Recommended: 3",
+
+    "Sandbox_JOST_StartLevel2Pips": "Starting Level: 2 Pips",
+    "Sandbox_JOST_StartLevel2Pips_tooltip": "Starting level granted for a trade skill with 2 pips of trait/profession investment. <LINE> Recommended: 5",
+
+    "Sandbox_JOST_StartLevel3Pips": "Starting Level: 3 Pips",
+    "Sandbox_JOST_StartLevel3Pips_tooltip": "Starting level granted for a trade skill with 3 pips of trait/profession investment. <LINE> Recommended: 7",
+
+    "Sandbox_JOST_StartLevel4PlusPips": "Starting Level: 4+ Pips",
+    "Sandbox_JOST_StartLevel4PlusPips_tooltip": "Starting level granted for a trade skill with 4 or more pips of trait/profession investment. <LINE> Recommended: 9",
+
+    "Sandbox_JOST_BaseCap0Pips": "Max Level: 0 Pips",
+    "Sandbox_JOST_BaseCap0Pips_tooltip": "Maximum level a trade skill with no relevant trait/profession investment can reach, before any linked-skill bonus. <LINE> Recommended: 3",
+
+    "Sandbox_JOST_BaseCap1Pip": "Max Level: 1 Pip",
+    "Sandbox_JOST_BaseCap1Pip_tooltip": "Maximum level a trade skill with 1 pip of investment can reach, before any linked-skill bonus. <LINE> Recommended: 5",
+
+    "Sandbox_JOST_BaseCap2Pips": "Max Level: 2 Pips",
+    "Sandbox_JOST_BaseCap2Pips_tooltip": "Maximum level a trade skill with 2 pips of investment can reach, before any linked-skill bonus. <LINE> Recommended: 7",
+
+    "Sandbox_JOST_BaseCap3Pips": "Max Level: 3 Pips",
+    "Sandbox_JOST_BaseCap3Pips_tooltip": "Maximum level a trade skill with 3 pips of investment can reach, before any linked-skill bonus. <LINE> Recommended: 9",
+
+    "Sandbox_JOST_BaseCap4PlusPips": "Max Level: 4+ Pips",
+    "Sandbox_JOST_BaseCap4PlusPips_tooltip": "Maximum level a trade skill with 4 or more pips of investment can reach. <LINE> Recommended: 10 (effectively uncapped)"
+}
