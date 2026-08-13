@@ -189,11 +189,13 @@ local function initializeCharacter(player)
 end
 
 --[[
-    Effective cap for a skill on this player: the exempt flag beats
-    everything (unlimited), then an admin cap override for this specific
-    skill, then the computed snapshot cap.
+    Effective cap for a skill on this player: being an admin (when
+    JOST.AdminCapExempt is on, the default) beats everything, then the
+    exempt flag, then an admin cap override for this specific skill, then
+    the computed snapshot cap.
 ]]
 local function getEffectiveCap(player, perkName)
+    if SkillDefs.isAdminCapExempt() and isAdmin(player) then return SkillDefs.VANILLA_MAX_LEVEL end
     local data = getModData(player)
     if data.exempt then return SkillDefs.VANILLA_MAX_LEVEL end
     if data.capOverrides and data.capOverrides[perkName] then

@@ -7,6 +7,9 @@
     "Sandbox_JOST_SynergyEnabled": "Linked-Skill Synergy",
     "Sandbox_JOST_SynergyEnabled_tooltip": "When on, a related skill with at least 1 pip grants this skill's cap a flat +1 (see the mod's linked-skill graph). When off, only a skill's own pips affect its cap.",
 
+    "Sandbox_JOST_AdminCapExempt": "Admins Exempt From Caps",
+    "Sandbox_JOST_AdminCapExempt_tooltip": "When on, any player with Admin access level is automatically exempt from all skill caps -- no manual command needed. Starting levels are unaffected either way.",
+
     "Sandbox_JOST_StartLevel0Pips": "Starting Level: 0 Pips",
     "Sandbox_JOST_StartLevel0Pips_tooltip": "Starting level granted for a trade skill with no relevant trait/profession investment. <LINE> Recommended: 0",
 

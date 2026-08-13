@@ -81,6 +81,13 @@ function SkillDefs.isSynergyEnabled()
     return getSandboxVar("SynergyEnabled", true)
 end
 
+-- When on (default), players with Admin access level are exempt from all
+-- skill caps automatically -- no manual admin command needed. Starting
+-- levels are unaffected; only cap enforcement is skipped for them.
+function SkillDefs.isAdminCapExempt()
+    return getSandboxVar("AdminCapExempt", true)
+end
+
 --[[
     Which of several pips->starting-level tables applies is a per-character
     choice via one of the four JOST:*Training traits below (module JOST) --

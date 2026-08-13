@@ -17,6 +17,14 @@ option JOST.SynergyEnabled
     translation = JOST_SynergyEnabled,
 }
 
+option JOST.AdminCapExempt
+{
+    type = boolean,
+    default = true,
+    page = JOST,
+    translation = JOST_AdminCapExempt,
+}
+
 option JOST.StartLevel0Pips
 {
     type = integer,
