@@ -91,9 +91,26 @@ local function initializeCharacter(player)
         profession = prof
     end
 
-    local snapshot = SkillCalc.computeSnapshot(traitObjects, profession)
+    --[[ Which training mode applies: check the stringified trait names
+    (already proven correct via :getName(), see above) against
+    SkillDefs.TRAINING_TRAIT_IDS. "default" if none of the four training
+    traits is present. Logged explicitly (not just inferred from the
+    startLevel numbers) because the exact string :getName() returns for a
+    JOST:-namespaced custom trait hasn't been confirmed live yet -- if
+    detection is silently failing, this print is what will show it. ]]
+    local trainingMode = "default"
+    for modeKey, traitId in pairs(SkillDefs.TRAINING_TRAIT_IDS) do
+        for _, name in ipairs(traitNames) do
+            if name == traitId then
+                trainingMode = modeKey
+            end
+        end
+    end
+
+    local snapshot = SkillCalc.computeSnapshot(traitObjects, profession, trainingMode)
     print("[JOST] initialized " .. tostring(player:getUsername()) ..
-        " traits=[" .. table.concat(traitNames, ",") .. "] profession=" .. tostring(profession))
+        " traits=[" .. table.concat(traitNames, ",") .. "] profession=" .. tostring(profession) ..
+        " trainingMode=" .. trainingMode)
     for _, perk in ipairs(SkillDefs.TRADE_SKILLS) do
         print("[JOST]   " .. perk .. ": pips=" .. tostring(snapshot.pips[perk]) ..
             " startLevel=" .. tostring(snapshot.startLevels[perk]) .. " cap=" .. tostring(snapshot.caps[perk]))

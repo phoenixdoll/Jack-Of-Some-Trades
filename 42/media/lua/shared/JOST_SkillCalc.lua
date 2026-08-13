@@ -116,10 +116,10 @@ function SkillCalc.computeAllPipsFromDefinitions(traitObjects, profession)
     return clamp(totals)
 end
 
--- Pips -> one-time starting level granted at spawn. Sandbox-overridable,
--- see SkillDefs.getStartLevel.
-function SkillCalc.getStartLevel(pips)
-    return SkillDefs.getStartLevel(pips)
+-- Pips -> one-time starting level granted at spawn. `mode` selects which
+-- of JOST's training-trait tables applies -- see SkillDefs.getStartLevel.
+function SkillCalc.getStartLevel(pips, mode)
+    return SkillDefs.getStartLevel(pips, mode)
 end
 
 -- Pips -> base cap, before any linked-skill synergy bonus. Sandbox-
@@ -164,16 +164,18 @@ end
     player:getCharacterTraits():getKnownTraits() -- not name strings.
     profession: the raw CharacterProfession object, e.g. straight from
     player:getDescriptor():getCharacterProfession() -- not a string.
+    trainingMode: which pips->starting-level table applies (see
+    SkillDefs.getStartLevel) -- "default" if omitted. Never affects caps.
 
     Returns { pips = {...}, startLevels = {...}, caps = {...} }.
 ]]
-function SkillCalc.computeSnapshot(traitObjects, profession)
+function SkillCalc.computeSnapshot(traitObjects, profession, trainingMode)
     local pips = SkillCalc.computeAllPipsFromDefinitions(traitObjects, profession)
 
     local startLevels = {}
     local caps = {}
     for _, perk in ipairs(SkillDefs.TRADE_SKILLS) do
-        startLevels[perk] = SkillCalc.getStartLevel(pips[perk])
+        startLevels[perk] = SkillCalc.getStartLevel(pips[perk], trainingMode)
         caps[perk] = SkillCalc.computeEffectiveCap(perk, pips)
     end
     return { pips = pips, startLevels = startLevels, caps = caps }

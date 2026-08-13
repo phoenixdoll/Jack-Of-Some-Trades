@@ -15,7 +15,7 @@ local UI_BORDER_SPACING = 10
 
 CharacterCreationProfession.prerender = function(self)
     originalPrerender(self)
-    self:drawTextCentre("SKILL CAP MOD IN USE", self.width / 2,
+    self:drawTextCentre("SKILL CAP MOD IN USE. SEE DISCORD FOR DETAILS", self.width / 2,
         UI_BORDER_SPACING + 1 + getTextManager():getFontHeight(UIFont.Large),
         1, 0, 0, 1, UIFont.Medium)
 end

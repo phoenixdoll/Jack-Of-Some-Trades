@@ -81,14 +81,63 @@ function SkillDefs.isSynergyEnabled()
     return getSandboxVar("SynergyEnabled", true)
 end
 
--- Pips -> starting level, granted once at spawn for a genuinely new character.
-function SkillDefs.getStartLevel(pips)
-    if pips >= 4 then return getSandboxVar("StartLevel4PlusPips", 9) end
+--[[
+    Which of several pips->starting-level tables applies is a per-character
+    choice via one of the four JOST:*Training traits below (module JOST) --
+    picking none gives the DEFAULT table, which is deliberately weaker than
+    the old single fixed table (now the "boosted" mode, gated behind a
+    2-cost trait instead of being free for everyone). The skill CAP is
+    ALWAYS computed from actual pips regardless of which mode applies --
+    these traits only ever affect the one-time starting-level grant, never
+    the cap. See JOST_traits.txt for the trait definitions themselves.
+]]
+SkillDefs.TRAINING_TRAIT_IDS = {
+    boosted = "JOST:BoostedTraining", -- 2-cost positive trait
+    normal = "JOST:NormalTraining",   -- +2 negative trait
+    half = "JOST:HalfTraining",       -- +6 negative trait
+    none = "JOST:NoTraining",         -- +10 negative trait
+}
+
+-- Pips -> starting level, granted once at spawn for a genuinely new
+-- character. `mode` is one of "default" (no training trait picked),
+-- "boosted", "normal", "half", "none" -- see TRAINING_TRAIT_IDS above.
+function SkillDefs.getStartLevel(pips, mode)
+    mode = mode or "default"
+
+    if mode == "none" then
+        return 0
+    end
+
+    if mode == "half" then
+        -- Half of the "normal" (no-bonus) level, rounded down. "Normal" is
+        -- just the pip count itself, so this is floor(pips / 2).
+        return math.floor(pips / 2)
+    end
+
+    if mode == "normal" then
+        -- No bonus at all: starting level literally equals the pip count,
+        -- uncapped (pips are already clamped 0-10 upstream).
+        return pips
+    end
+
+    if mode == "boosted" then
+        if pips >= 4 then return getSandboxVar("StartLevel4PlusPips", 9) end
+        local byPips = {
+            [0] = getSandboxVar("StartLevel0Pips", 0),
+            [1] = getSandboxVar("StartLevel1Pip", 3),
+            [2] = getSandboxVar("StartLevel2Pips", 5),
+            [3] = getSandboxVar("StartLevel3Pips", 7),
+        }
+        return byPips[pips] or 0
+    end
+
+    -- "default": nobody picked a training trait. Weaker than "boosted".
+    if pips >= 4 then return getSandboxVar("StartLevelDefault4PlusPips", 7) end
     local byPips = {
-        [0] = getSandboxVar("StartLevel0Pips", 0),
-        [1] = getSandboxVar("StartLevel1Pip", 3),
-        [2] = getSandboxVar("StartLevel2Pips", 5),
-        [3] = getSandboxVar("StartLevel3Pips", 7),
+        [0] = getSandboxVar("StartLevelDefault0Pips", 0),
+        [1] = getSandboxVar("StartLevelDefault1Pip", 2),
+        [2] = getSandboxVar("StartLevelDefault2Pips", 4),
+        [3] = getSandboxVar("StartLevelDefault3Pips", 6),
     }
     return byPips[pips] or 0
 end
