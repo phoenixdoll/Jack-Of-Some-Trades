@@ -214,13 +214,7 @@ local jostLoggedFirstTick = false
 --[[
     Cap clamps are never applied synchronously inside onLevelPerk. Forcing a
     level change (setPerkLevelDebug/setXPToLevel) from inside the LevelPerk
-    event handler itself is a plausible re-entrancy risk: that forced change
-    is itself a level change, which could re-fire Events.LevelPerk (calling
-    back into this same handler while the engine is still mid-way through
-    processing the original level-up, including the expensive
-    getScriptManager():checkAutoLearn() recipe check) -- a same-tick chain
-    reaction that's a reasonable suspect for a live crash observed when a
-    skill crossed its cap.
+    event handler itself is a plausible re-entrancy risk
 ]]
 local pendingClamps = {}
 
@@ -250,17 +244,7 @@ end
 
 --[[
     Sweep every trade skill's CURRENT level against its cap for an already-
-    initialized player, queuing a clamp for anything over. This is a safety
-    net alongside onLevelPerk, not a replacement for it -- confirmed live
-    that Foraging can reach a level with zero trace of Events.LevelPerk ever
-    firing for it (no WARNING log, no onLevelPerk activity at all), while
-    every other trade skill enforced correctly through the event. Foraging
-    levels through the Search Mode system rather than standard crafting XP
-    gain, which apparently doesn't reliably raise LevelPerk the same way.
-    Catching it here means enforcement no longer depends on LevelPerk firing
-    at all -- worst case it's caught within one checkAllPlayers sweep
-    (~1 second) instead of instantly, same latency the queued clamp from
-    onLevelPerk already has anyway.
+    initialized player, queuing a clamp for anything over. 
 ]]
 local function checkCapsForPlayer(player)
     local data = getModData(player)
@@ -324,7 +308,7 @@ local function onLevelPerk(owner, perk, level, addBuffer)
 end
 
 --[[
-    Admin override command surface, reached via the standard client -> server
+    Not implemented yet: Admin override command surface, reached via the standard client -> server
     RPC pattern (sendClientCommand / Events.OnClientCommand -- the same
     mechanism vanilla itself uses for e.g. server/ClientCommands.lua).
     Actions:

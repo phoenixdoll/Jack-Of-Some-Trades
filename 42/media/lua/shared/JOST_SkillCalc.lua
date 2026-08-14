@@ -1,10 +1,10 @@
 --[[
-    Jack of Some Trades - pure pip/cap/start-level calculations.
+    Jack of Some Trades - pip/cap/start-level calculations.
 
-    No side effects, no player mutation -- everything here just takes
-    trait/profession data in and returns numbers out, so it's easy to test
-    and reuse from both the server enforcement code and (later) any client
-    UI that wants to display a character's caps.
+    everything takes  trait/profession data in and returns numbers out
+    this is for server enforcement code and (later) any client
+    UI that wants to display a character's caps. 
+    I haven't worked out how to do that yet.
 ]]
 
 local SkillDefs = require("JOST_SkillDefs")
@@ -16,7 +16,7 @@ local SkillCalc = {}
     CharacterTraitDefinition/CharacterProfessionDefinition:getXpBoosts()
     and, per the engine's Javadocs, Xp:getXpBoosts()/getXPBoostMap() return)
     comes back from transformIntoKahluaTable keyed by Perk-typed objects,
-    NOT plain strings -- confirmed via shared/NPCs/MainCreationMethods.lua:
+    NOT plain strings. Confirmed via shared/NPCs/MainCreationMethods.lua:
     `PerkFactory.getPerkName(perk)` is called directly on the loop key,
     which only makes sense if `perk` is a Perk object. Convert each key to
     the plain skill-name string (e.g. "Woodwork") via :getType(), the same
@@ -60,19 +60,16 @@ end
 --[[
     NOTE: player:getXp():getXpBoosts()/getXPBoostMap() (documented in the
     engine's Javadocs on the Xp class) turned out NOT to be safely callable
-    from Lua -- confirmed live: calling it throws a java.lang.RuntimeException
+    from Lua. OOPS. Confirmed live: calling it throws a java.lang.RuntimeException
     from inside Kahlua's OWN pcall implementation (KahluaUtil.fail), meaning
     even a pcall wrapper around the call doesn't catch it, and it escapes to
     crash whatever called in. Removed entirely; SkillCalc only ever uses
-    computeAllPipsFromDefinitions below. Confirmed as a hard "don't do this",
-    not just "unverified" -- see the getPerkBoost/getXpBoosts investigation
-    in project history for why this was worth trying in the first place
-    (mainly: automatic compatibility with modded traits).
+    computeAllPipsFromDefinitions below. 
 ]]
 
 --[[
     Fallback: sums a profession's + a list of traits' declared XPBoosts for
-    every trade skill -- exactly how vanilla computes "pips" for the
+    every trade skill which is how vanilla computes "pips" for the
     character-creation screen (CharacterCreationProfession:checkXPBoost,
     client/OptionScreens/CharacterCreationProfession.lua:405-431), just
     without the UI parts. Used when computeAllPipsFromLiveXp can't get a
@@ -80,7 +77,7 @@ end
 
     traitObjects: array of the RAW CharacterTrait-typed objects (e.g.
     straight from playerObj:getCharacterTraits():getKnownTraits(), each
-    element passed through as-is) -- NOT name strings.
+    element passed through as-is). NOT name strings.
     CharacterTraitDefinition.getCharacterTraitDefinition() wants the raw
     object, same requirement as the profession lookup below (confirmed by
     how vanilla itself calls it, never converting first).
