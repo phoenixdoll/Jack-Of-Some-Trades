@@ -127,30 +127,37 @@ local function initializeCharacter(player)
     multi-pick reaching this code some other way (e.g. debug/admin trait
     grants bypassing the creation screen), so it can never be gamed for a
     better outcome than the worst picked trait alone would give. ]]
-    local MODE_PRIORITY = { "none", "half", "normal", "boosted" }
-    local pickedModes = {}
-    for modeKey, traitId in pairs(SkillDefs.TRAINING_TRAIT_IDS) do
-        local bareName = traitId:match("^JOST:(.+)$")
-        local traitObj = bareName and JOST and JOST.traits and JOST.traits[bareName]
-        if traitObj then
-            local okHas, has = pcall(function() return player:hasTrait(traitObj) end)
-            if okHas and has then
-                pickedModes[modeKey] = true
+    -- JOST.TrainingTraitsEnabled (default on) -- when off, every training
+    -- trait a character picked is ignored entirely and trainingMode stays
+    -- "default", same as if nothing was picked. Traits remain selectable
+    -- at character creation either way (this mod has no hook into hiding
+    -- them from that screen); this only turns off what picking one does.
+    local trainingMode = "default"
+    if SkillDefs.isTrainingTraitsEnabled() then
+        local MODE_PRIORITY = { "none", "half", "normal", "boosted" }
+        local pickedModes = {}
+        for modeKey, traitId in pairs(SkillDefs.TRAINING_TRAIT_IDS) do
+            local bareName = traitId:match("^JOST:(.+)$")
+            local traitObj = bareName and JOST and JOST.traits and JOST.traits[bareName]
+            if traitObj then
+                local okHas, has = pcall(function() return player:hasTrait(traitObj) end)
+                if okHas and has then
+                    pickedModes[modeKey] = true
+                end
             end
         end
-    end
-    local trainingMode = "default"
-    for _, modeKey in ipairs(MODE_PRIORITY) do
-        if pickedModes[modeKey] then
-            trainingMode = modeKey
-            break
+        for _, modeKey in ipairs(MODE_PRIORITY) do
+            if pickedModes[modeKey] then
+                trainingMode = modeKey
+                break
+            end
         end
-    end
-    local pickedCount = 0
-    for _ in pairs(pickedModes) do pickedCount = pickedCount + 1 end
-    if pickedCount > 1 then
-        print("[JOST] WARNING: " .. tostring(player:getUsername()) ..
-            " has more than one training trait picked -- falling back to the most conservative, trainingMode=" .. trainingMode)
+        local pickedCount = 0
+        for _ in pairs(pickedModes) do pickedCount = pickedCount + 1 end
+        if pickedCount > 1 then
+            print("[JOST] WARNING: " .. tostring(player:getUsername()) ..
+                " has more than one training trait picked -- falling back to the most conservative, trainingMode=" .. trainingMode)
+        end
     end
 
     local snapshot = SkillCalc.computeSnapshot(traitObjects, profession, trainingMode)

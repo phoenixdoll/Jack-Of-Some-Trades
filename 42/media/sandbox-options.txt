@@ -25,6 +25,14 @@ option JOST.AdminCapExempt
     translation = JOST_AdminCapExempt,
 }
 
+option JOST.TrainingTraitsEnabled
+{
+    type = boolean,
+    default = true,
+    page = JOST,
+    translation = JOST_TrainingTraitsEnabled,
+}
+
 option JOST.StartLevel0Pips
 {
     type = integer,
@@ -75,12 +83,62 @@ option JOST.StartLevel4PlusPips
     translation = JOST_StartLevel4PlusPips,
 }
 
+option JOST.StartLevelDefault0Pips
+{
+    type = integer,
+    min = 0,
+    max = 10,
+    default = 0,
+    page = JOST,
+    translation = JOST_StartLevelDefault0Pips,
+}
+
+option JOST.StartLevelDefault1Pip
+{
+    type = integer,
+    min = 0,
+    max = 10,
+    default = 2,
+    page = JOST,
+    translation = JOST_StartLevelDefault1Pip,
+}
+
+option JOST.StartLevelDefault2Pips
+{
+    type = integer,
+    min = 0,
+    max = 10,
+    default = 4,
+    page = JOST,
+    translation = JOST_StartLevelDefault2Pips,
+}
+
+option JOST.StartLevelDefault3Pips
+{
+    type = integer,
+    min = 0,
+    max = 10,
+    default = 6,
+    page = JOST,
+    translation = JOST_StartLevelDefault3Pips,
+}
+
+option JOST.StartLevelDefault4PlusPips
+{
+    type = integer,
+    min = 0,
+    max = 10,
+    default = 7,
+    page = JOST,
+    translation = JOST_StartLevelDefault4PlusPips,
+}
+
 option JOST.BaseCap0Pips
 {
     type = integer,
     min = 0,
     max = 10,
-    default = 3,
+    default = 5,
     page = JOST,
     translation = JOST_BaseCap0Pips,
 }

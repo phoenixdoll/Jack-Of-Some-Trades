@@ -88,6 +88,15 @@ function SkillDefs.isAdminCapExempt()
     return getSandboxVar("AdminCapExempt", true)
 end
 
+-- When off, the four training traits (see TRAINING_TRAIT_IDS below) are
+-- still selectable at character creation (hiding them from the trait list
+-- isn't done here -- see JOST_SkillServer.lua's initializeCharacter) but
+-- have NO effect: every character is treated as trainingMode="default",
+-- same as picking no training trait at all.
+function SkillDefs.isTrainingTraitsEnabled()
+    return getSandboxVar("TrainingTraitsEnabled", true)
+end
+
 --[[
     Which of several pips->starting-level tables applies is a per-character
     choice via one of the four JOST:*Training traits below (module JOST) --
@@ -153,7 +162,7 @@ end
 function SkillDefs.getBaseCap(pips)
     if pips >= 4 then return getSandboxVar("BaseCap4PlusPips", 10) end
     local byPips = {
-        [0] = getSandboxVar("BaseCap0Pips", 3),
+        [0] = getSandboxVar("BaseCap0Pips", 5),
         [1] = getSandboxVar("BaseCap1Pip", 5),
         [2] = getSandboxVar("BaseCap2Pips", 7),
         [3] = getSandboxVar("BaseCap3Pips", 9),
