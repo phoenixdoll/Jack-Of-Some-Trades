@@ -178,4 +178,52 @@ function SkillCalc.computeSnapshot(traitObjects, profession, trainingMode)
     return { pips = pips, startLevels = startLevels, caps = caps }
 end
 
+-- Same technique as JOST_SkillServer.lua's isAdmin: PZ's access level
+-- string isn't reliably lowercase ("Admin" observed live), so normalize
+-- before compare. Duplicated here (rather than required) since this file
+-- needs to work from client-only UI code, where the server-side file
+-- isn't guaranteed to be loaded.
+local function isAdmin(player)
+    if not player then return false end
+    local ok, accessLevel = pcall(function() return player:getAccessLevel() end)
+    if not ok or not accessLevel then return false end
+    return tostring(accessLevel):lower() == "admin"
+end
+
+--[[
+    Display-only read of a player's already-computed effective cap for a
+    trade skill, straight from their own ModData (set by
+    JOST_SkillServer.lua's initializeCharacter/onClientCommand). This is
+    for UI code (e.g. the in-game skill panel) to show what's already
+    being enforced -- it never enforces anything itself, and a player's
+    own ModData is always synced to their own client, so this is safe to
+    call from client-side UI for the local player.
+
+    Mirrors JOST_SkillServer.lua's local getEffectiveCap exactly (same
+    precedence: admin exemption, then per-player exempt flag, then an
+    admin's per-skill override, then the computed snapshot cap) so what's
+    displayed always matches what's actually enforced.
+
+    Returns SkillDefs.VANILLA_MAX_LEVEL (10) if the data isn't ready yet
+    (e.g. a freshly spawned character this tick hasn't initialized) --
+    the same fallback the server uses, so nothing visually claims a cap
+    that isn't actually computed/enforced yet.
+]]
+function SkillCalc.getStoredEffectiveCap(player, perkName)
+    if not player then return SkillDefs.VANILLA_MAX_LEVEL end
+    if SkillDefs.isAdminCapExempt() and isAdmin(player) then return SkillDefs.VANILLA_MAX_LEVEL end
+
+    local modData = player:getModData()
+    local data = modData and modData["JOST"]
+    if not data then return SkillDefs.VANILLA_MAX_LEVEL end
+    if data.exempt then return SkillDefs.VANILLA_MAX_LEVEL end
+    if data.capOverrides and data.capOverrides[perkName] then
+        return data.capOverrides[perkName]
+    end
+    if data.caps and data.caps[perkName] then
+        return data.caps[perkName]
+    end
+    return SkillDefs.VANILLA_MAX_LEVEL
+end
+
 return SkillCalc
