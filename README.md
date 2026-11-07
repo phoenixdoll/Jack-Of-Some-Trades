@@ -71,7 +71,7 @@ By default (no training trait picked):
 
 Four optional, mutually-exclusive traits change which table applies. Unlike the default table above, these do more than just skip a bonus. Picking one of them can pull your starting level *below* whatever vanilla itself would have already granted from your profession/trait pips, since the whole point is to start with less than your background alone would imply.
 
-**Experienced** (costs 2 points), the strongest table:
+**Experienced** (costs 2 points), an even larger bonus to starting skills:
 ```
      chosen    |
       pips     | starting skill

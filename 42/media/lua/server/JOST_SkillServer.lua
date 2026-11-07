@@ -127,11 +127,12 @@ local function initializeCharacter(player)
     multi-pick reaching this code some other way (e.g. debug/admin trait
     grants bypassing the creation screen), so it can never be gamed for a
     better outcome than the worst picked trait alone would give. ]]
-    -- JOST.TrainingTraitsEnabled (default on): when off, every training
-    -- trait a character picked is ignored entirely and trainingMode stays
-    -- "default", same as if nothing was picked. Traits remain selectable
-    -- at character creation either way (this mod has no hook into hiding
-    -- them from that screen); this only turns off what picking one does.
+    -- JOST.TrainingTraitsEnabled (default on): when off, JOST_CharCreation
+    -- TraitFilter.lua already keeps these traits off the creation screen
+    -- entirely, so this check only matters as a fallback for a character
+    -- who already has one from before the toggle was flipped off; it's
+    -- ignored entirely and trainingMode stays "default", same as if
+    -- nothing was picked.
     local trainingMode = "default"
     if SkillDefs.isTrainingTraitsEnabled() then
         local MODE_PRIORITY = { "none", "half", "normal", "boosted" }

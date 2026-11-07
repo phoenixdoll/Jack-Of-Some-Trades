@@ -89,10 +89,11 @@ function SkillDefs.isAdminCapExempt()
 end
 
 -- When off, the four training traits (see TRAINING_TRAIT_IDS below) are
--- still selectable at character creation (hiding them from the trait list
--- isn't done here, see JOST_SkillServer.lua's initializeCharacter) but
--- have NO effect: every character is treated as trainingMode="default",
--- same as picking no training trait at all.
+-- removed from the trait list at character creation entirely (see
+-- JOST_CharCreationTraitFilter.lua). As a fallback for anyone who already
+-- has one on an existing character (e.g. the toggle got flipped off after
+-- they spawned), the server still treats them as trainingMode="default",
+-- same as picking no training trait at all, see initializeCharacter below.
 function SkillDefs.isTrainingTraitsEnabled()
     return getSandboxVar("TrainingTraitsEnabled", true)
 end
