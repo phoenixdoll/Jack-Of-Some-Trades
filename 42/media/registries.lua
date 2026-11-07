@@ -2,7 +2,7 @@
     Jack of Some Trades - custom CharacterTrait registration.
 
     Required before media/scripts/JOST_traits.txt's character_trait_definition
-    blocks can reference these IDs -- confirmed via the PZ wiki
+    blocks can reference these IDs, confirmed via the PZ wiki
     ("Creating a trait mod") and the real published SomewhatTraitsSkills mod's
     own media/registries.lua: a custom CharacterTrait must be registered here
     first, or CharacterTraitDefinition's constructor throws a

@@ -1,7 +1,7 @@
 /*
     Jack of Some Trades - training-style traits.
 
-    These don't grant any XPBoosts themselves -- they don't touch pips at
+    These don't grant any XPBoosts themselves, they don't touch pips at
     all. They only select which of JOST's several pips->starting-level
     tables applies (see JOST_SkillDefs.lua); the skill CAP is always
     computed from a character's actual pips regardless of which (if any)

@@ -6,7 +6,7 @@
     (verified against the installed game's media/lua and media/scripts),
     which differ from their in-game display names in several cases (e.g.
     Perks.Woodwork displays as "Carpentry", Perks.Doctor as "First Aid",
-    Perks.PlantScavenging as "Foraging" -- this last one bit us live: it was
+    Perks.PlantScavenging as "Foraging". This last one bit us live: it was
     originally listed here as "Foraging", which isn't a real Perks.* member,
     so Perks.FromString("Foraging") silently returned nil and the skill went
     completely unenforced with zero errors anywhere. Any future skill added
@@ -43,7 +43,7 @@ SkillDefs.TRADE_SKILLS = {
     "Doctor",       -- First Aid
     "Fishing",
     "PlantScavenging", -- Foraging (confirmed via server/XpSystem/XPSystem_SkillBook.lua:84,
-                       -- SkillBook["Foraging"].perk = Perks.PlantScavenging -- "Foraging" is
+                       -- SkillBook["Foraging"].perk = Perks.PlantScavenging, "Foraging" is
                        -- display-only, Perks.Foraging isn't a real perk and FromString("Foraging")
                        -- silently returned nil, which is why this skill went completely unenforced)
     "Tracking",
@@ -60,7 +60,7 @@ SkillDefs.VANILLA_MAX_LEVEL = 10
 
 --[[
     Sandbox-overridable numbers. Read live every call (not cached at load
-    time) -- MP's sandbox sync can complete after this file's require(),
+    time), MP's sandbox sync can complete after this file's require(),
     same lesson TAZC_Config already learned the hard way, see its
     getSandboxVar/liveSandbox comments.
 ]]
@@ -82,7 +82,7 @@ function SkillDefs.isSynergyEnabled()
 end
 
 -- When on (default), players with Admin access level are exempt from all
--- skill caps automatically -- no manual admin command needed. Starting
+-- skill caps automatically, no manual admin command needed. Starting
 -- levels are unaffected; only cap enforcement is skipped for them.
 function SkillDefs.isAdminCapExempt()
     return getSandboxVar("AdminCapExempt", true)
@@ -90,7 +90,7 @@ end
 
 -- When off, the four training traits (see TRAINING_TRAIT_IDS below) are
 -- still selectable at character creation (hiding them from the trait list
--- isn't done here -- see JOST_SkillServer.lua's initializeCharacter) but
+-- isn't done here, see JOST_SkillServer.lua's initializeCharacter) but
 -- have NO effect: every character is treated as trainingMode="default",
 -- same as picking no training trait at all.
 function SkillDefs.isTrainingTraitsEnabled()
@@ -116,7 +116,7 @@ SkillDefs.TRAINING_TRAIT_IDS = {
 
 -- Pips -> starting level, granted once at spawn for a genuinely new
 -- character. `mode` is one of "default" (no training trait picked),
--- "boosted", "normal", "half", "none" -- see TRAINING_TRAIT_IDS above.
+-- "boosted", "normal", "half", "none", see TRAINING_TRAIT_IDS above.
 function SkillDefs.getStartLevel(pips, mode)
     mode = mode or "default"
 

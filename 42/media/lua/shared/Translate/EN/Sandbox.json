@@ -8,40 +8,40 @@
     "Sandbox_JOST_SynergyEnabled_tooltip": "When on, a related skill with at least 1 pip grants this skill's cap a flat +1 (see the mod's linked-skill graph). When off, only a skill's own pips affect its cap.",
 
     "Sandbox_JOST_AdminCapExempt": "Admins Exempt From Caps",
-    "Sandbox_JOST_AdminCapExempt_tooltip": "When on, any player with Admin access level is automatically exempt from all skill caps -- no manual command needed. Starting levels are unaffected either way.",
+    "Sandbox_JOST_AdminCapExempt_tooltip": "When on, any player with Admin access level is automatically exempt from all skill caps, no manual command needed. Starting levels are unaffected either way.",
 
     "Sandbox_JOST_TrainingTraitsEnabled": "Training Traits Enabled",
-    "Sandbox_JOST_TrainingTraitsEnabled_tooltip": "When on (default), the four training traits (Experienced, Self Taught, Unfinished Education, Blank Slate) work as described. When off, picking any of them has NO effect -- every character just gets the 'Starting Level: Default (No Trait)' numbers below, regardless of trait picked. Traits remain selectable either way; this only turns off what they do.",
+    "Sandbox_JOST_TrainingTraitsEnabled_tooltip": "When on (default), the four training traits (Experienced, Self Taught, Unfinished Education, Blank Slate) work as described. When off, they are removed from the trait list at character creation entirely.",
 
     "Sandbox_JOST_StartLevel0Pips": "Starting Level (Experienced trait): 0 Pips",
     "Sandbox_JOST_StartLevel0Pips_tooltip": "ONLY applies to a character who picked the Experienced trait. Starting level granted for a trade skill with no relevant trait/profession investment. <LINE> Recommended: 0",
 
     "Sandbox_JOST_StartLevel1Pip": "Starting Level (Experienced trait): 1 Pip",
-    "Sandbox_JOST_StartLevel1Pip_tooltip": "ONLY applies to a character who picked the Experienced trait. Starting level granted for a trade skill with 1 pip of trait/profession investment. <LINE> Recommended: 3 -- if you want this to be a meaningful bonus, keep it HIGHER than 'Starting Level: Default (No Trait): 1 Pip' below, or picking Experienced costs 2 trait points for nothing.",
+    "Sandbox_JOST_StartLevel1Pip_tooltip": "ONLY applies to a character who picked the Experienced trait. Starting level granted for a trade skill with 1 pip of trait/profession investment. <LINE> Recommended: 3. If you want this to be a meaningful bonus, keep it HIGHER than 'Starting Level: Default (No Trait): 1 Pip' below, or picking Experienced costs 2 trait points for nothing.",
 
     "Sandbox_JOST_StartLevel2Pips": "Starting Level (Experienced trait): 2 Pips",
-    "Sandbox_JOST_StartLevel2Pips_tooltip": "ONLY applies to a character who picked the Experienced trait. Starting level granted for a trade skill with 2 pips of trait/profession investment. <LINE> Recommended: 5 -- keep higher than the matching Default (No Trait) value below.",
+    "Sandbox_JOST_StartLevel2Pips_tooltip": "ONLY applies to a character who picked the Experienced trait. Starting level granted for a trade skill with 2 pips of trait/profession investment. <LINE> Recommended: 5. Keep higher than the matching Default (No Trait) value below.",
 
     "Sandbox_JOST_StartLevel3Pips": "Starting Level (Experienced trait): 3 Pips",
-    "Sandbox_JOST_StartLevel3Pips_tooltip": "ONLY applies to a character who picked the Experienced trait. Starting level granted for a trade skill with 3 pips of trait/profession investment. <LINE> Recommended: 7 -- keep higher than the matching Default (No Trait) value below.",
+    "Sandbox_JOST_StartLevel3Pips_tooltip": "ONLY applies to a character who picked the Experienced trait. Starting level granted for a trade skill with 3 pips of trait/profession investment. <LINE> Recommended: 7. Keep higher than the matching Default (No Trait) value below.",
 
     "Sandbox_JOST_StartLevel4PlusPips": "Starting Level (Experienced trait): 4+ Pips",
-    "Sandbox_JOST_StartLevel4PlusPips_tooltip": "ONLY applies to a character who picked the Experienced trait. Starting level granted for a trade skill with 4 or more pips of trait/profession investment. <LINE> Recommended: 9 -- keep higher than the matching Default (No Trait) value below.",
+    "Sandbox_JOST_StartLevel4PlusPips_tooltip": "ONLY applies to a character who picked the Experienced trait. Starting level granted for a trade skill with 4 or more pips of trait/profession investment. <LINE> Recommended: 9. Keep higher than the matching Default (No Trait) value below.",
 
     "Sandbox_JOST_StartLevelDefault0Pips": "Starting Level: Default (No Trait): 0 Pips",
     "Sandbox_JOST_StartLevelDefault0Pips_tooltip": "Applies to every character who did NOT pick a training trait (the vast majority of players). Starting level granted for a trade skill with no relevant trait/profession investment. <LINE> Recommended: 0",
 
     "Sandbox_JOST_StartLevelDefault1Pip": "Starting Level: Default (No Trait): 1 Pip",
-    "Sandbox_JOST_StartLevelDefault1Pip_tooltip": "Applies to every character who did NOT pick a training trait (the vast majority of players). Starting level granted for a trade skill with 1 pip of trait/profession investment. <LINE> Recommended: 2 -- keep lower than 'Starting Level (Experienced trait): 1 Pip' above.",
+    "Sandbox_JOST_StartLevelDefault1Pip_tooltip": "Applies to every character who did NOT pick a training trait (the vast majority of players). Starting level granted for a trade skill with 1 pip of trait/profession investment. <LINE> Recommended: 2. Keep lower than 'Starting Level (Experienced trait): 1 Pip' above.",
 
     "Sandbox_JOST_StartLevelDefault2Pips": "Starting Level: Default (No Trait): 2 Pips",
-    "Sandbox_JOST_StartLevelDefault2Pips_tooltip": "Applies to every character who did NOT pick a training trait (the vast majority of players). Starting level granted for a trade skill with 2 pips of trait/profession investment. <LINE> Recommended: 4 -- keep lower than the matching Experienced-trait value above.",
+    "Sandbox_JOST_StartLevelDefault2Pips_tooltip": "Applies to every character who did NOT pick a training trait (the vast majority of players). Starting level granted for a trade skill with 2 pips of trait/profession investment. <LINE> Recommended: 4. Keep lower than the matching Experienced-trait value above.",
 
     "Sandbox_JOST_StartLevelDefault3Pips": "Starting Level: Default (No Trait): 3 Pips",
-    "Sandbox_JOST_StartLevelDefault3Pips_tooltip": "Applies to every character who did NOT pick a training trait (the vast majority of players). Starting level granted for a trade skill with 3 pips of trait/profession investment. <LINE> Recommended: 6 -- keep lower than the matching Experienced-trait value above.",
+    "Sandbox_JOST_StartLevelDefault3Pips_tooltip": "Applies to every character who did NOT pick a training trait (the vast majority of players). Starting level granted for a trade skill with 3 pips of trait/profession investment. <LINE> Recommended: 6. Keep lower than the matching Experienced-trait value above.",
 
     "Sandbox_JOST_StartLevelDefault4PlusPips": "Starting Level: Default (No Trait): 4+ Pips",
-    "Sandbox_JOST_StartLevelDefault4PlusPips_tooltip": "Applies to every character who did NOT pick a training trait (the vast majority of players). Starting level granted for a trade skill with 4 or more pips of trait/profession investment. <LINE> Recommended: 7 -- keep lower than the matching Experienced-trait value above.",
+    "Sandbox_JOST_StartLevelDefault4PlusPips_tooltip": "Applies to every character who did NOT pick a training trait (the vast majority of players). Starting level granted for a trade skill with 4 or more pips of trait/profession investment. <LINE> Recommended: 7. Keep lower than the matching Experienced-trait value above.",
 
     "Sandbox_JOST_BaseCap0Pips": "Max Level: 0 Pips",
     "Sandbox_JOST_BaseCap0Pips_tooltip": "Maximum level a trade skill with no relevant trait/profession investment can reach, before any linked-skill bonus. <LINE> Recommended: 4",

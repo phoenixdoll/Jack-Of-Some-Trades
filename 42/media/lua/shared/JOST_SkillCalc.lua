@@ -114,7 +114,7 @@ function SkillCalc.computeAllPipsFromDefinitions(traitObjects, profession)
 end
 
 -- Pips -> one-time starting level granted at spawn. `mode` selects which
--- of JOST's training-trait tables applies -- see SkillDefs.getStartLevel.
+-- of JOST's training-trait tables applies, see SkillDefs.getStartLevel.
 function SkillCalc.getStartLevel(pips, mode)
     return SkillDefs.getStartLevel(pips, mode)
 end
@@ -158,11 +158,11 @@ end
     (SkillCalc.computeAllPipsFromDefinitions).
 
     traitObjects: raw CharacterTrait objects, e.g. from
-    player:getCharacterTraits():getKnownTraits() -- not name strings.
+    player:getCharacterTraits():getKnownTraits(), not name strings.
     profession: the raw CharacterProfession object, e.g. straight from
-    player:getDescriptor():getCharacterProfession() -- not a string.
+    player:getDescriptor():getCharacterProfession(), not a string.
     trainingMode: which pips->starting-level table applies (see
-    SkillDefs.getStartLevel) -- "default" if omitted. Never affects caps.
+    SkillDefs.getStartLevel), "default" if omitted. Never affects caps.
 
     Returns { pips = {...}, startLevels = {...}, caps = {...} }.
 ]]
@@ -195,7 +195,7 @@ end
     trade skill, straight from their own ModData (set by
     JOST_SkillServer.lua's initializeCharacter/onClientCommand). This is
     for UI code (e.g. the in-game skill panel) to show what's already
-    being enforced -- it never enforces anything itself, and a player's
+    being enforced, it never enforces anything itself, and a player's
     own ModData is always synced to their own client, so this is safe to
     call from client-side UI for the local player.
 

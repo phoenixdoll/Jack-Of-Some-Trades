@@ -50,7 +50,7 @@ end
     profession that were actually chosen, compute pips/caps/start levels
     from them, and grant the starting levels.
 
-    Under "default" training mode (no training trait picked -- the only
+    Under "default" training mode (no training trait picked, the only
     mode an already-existing character can be in, since a training trait
     can only be chosen at character creation), starting levels only ever
     RAISE a skill, never lower it: if this mod is added to a server with
@@ -65,7 +65,7 @@ end
     vanilla's own inherent starting bump from profession/trait pips already
     granted (confirmed live: picking a profession alone already starts a
     character above level 0 in its relevant skills, before this mod ever
-    runs) -- otherwise "you don't start off with the skills" never actually
+    runs); otherwise "you don't start off with the skills" never actually
     holds for those two traits.
 ]]
 local function initializeCharacter(player)
@@ -110,11 +110,11 @@ local function initializeCharacter(player)
     calls hasTrait() (e.g. client/BuildingObjects/TimedActions/
     ISBuildAction.lua:269 `character:hasTrait(CharacterTrait.HANDY)`,
     shared/Foraging/forageSystem.lua:1719 `_character:hasTrait(characterTrait)`
-    where characterTrait comes from CharacterTrait.get(...)) -- always a real
+    where characterTrait comes from CharacterTrait.get(...)), always a real
     object, never a plain string. This replaces an earlier approach that
     compared traitObj:getName() strings against SkillDefs.TRAINING_TRAIT_IDS,
     which depended on assuming the exact string format :getName() returns
-    for a custom JOST:-namespaced trait -- never actually confirmed live, so
+    for a custom JOST:-namespaced trait, never actually confirmed live, so
     switched to the type-safe check instead of relying on that guess.
     JOST.traits (the bare-name-keyed table of registered CharacterTrait
     objects) is a global set by media/registries.lua, which runs before any
@@ -123,11 +123,11 @@ local function initializeCharacter(player)
     These traits do use MutuallyExclusiveTraits (see JOST_traits.txt) so the
     character-creation screen should already stop a player picking more than
     one. Checked here in a fixed, most-conservative-wins order ("none" >
-    "half" > "normal" > "boosted") anyway -- cheap defense-in-depth against a
+    "half" > "normal" > "boosted") anyway, cheap defense-in-depth against a
     multi-pick reaching this code some other way (e.g. debug/admin trait
     grants bypassing the creation screen), so it can never be gamed for a
     better outcome than the worst picked trait alone would give. ]]
-    -- JOST.TrainingTraitsEnabled (default on) -- when off, every training
+    -- JOST.TrainingTraitsEnabled (default on): when off, every training
     -- trait a character picked is ignored entirely and trainingMode stays
     -- "default", same as if nothing was picked. Traits remain selectable
     -- at character creation either way (this mod has no hook into hiding
@@ -156,7 +156,7 @@ local function initializeCharacter(player)
         for _ in pairs(pickedModes) do pickedCount = pickedCount + 1 end
         if pickedCount > 1 then
             print("[JOST] WARNING: " .. tostring(player:getUsername()) ..
-                " has more than one training trait picked -- falling back to the most conservative, trainingMode=" .. trainingMode)
+                " has more than one training trait picked, falling back to the most conservative, trainingMode=" .. trainingMode)
         end
     end
 
@@ -241,7 +241,7 @@ local function processPendingClamps()
                     local resultLevel = player:getPerkLevel(perkType)
                     if resultLevel ~= cap then
                         print("[JOST] WARNING: clamped " .. entry.perkName .. " to cap " .. tostring(cap) ..
-                            " but getPerkLevel now reads " .. tostring(resultLevel) .. " -- setPerkLevel did not land exactly on the cap")
+                            " but getPerkLevel now reads " .. tostring(resultLevel) .. ", setPerkLevel did not land exactly on the cap")
                     end
                 end
             end
@@ -316,7 +316,7 @@ end
 
 --[[
     Not implemented yet: Admin override command surface, reached via the standard client -> server
-    RPC pattern (sendClientCommand / Events.OnClientCommand -- the same
+    RPC pattern (sendClientCommand / Events.OnClientCommand), the same
     mechanism vanilla itself uses for e.g. server/ClientCommands.lua).
     Actions:
       ExemptPlayer  { target = username, exempt = true|false }

@@ -6,10 +6,10 @@
     only the trait/profession-boosted skills, each shown as N colored bars
     + a flat "+75/100/125%" label) with every JOST trade skill, each drawn
     as a full 10-square row:
-      - squares 1..startLevel : green  -- the level you'll actually spawn
+      - squares 1..startLevel : green, the level you'll actually spawn
                                           with (SkillCalc.getStartLevel)
-      - squares startLevel+1..cap : yellow -- reachable later through play
-      - squares cap+1..10 : red -- unreachable, past the skill's cap
+      - squares startLevel+1..cap : yellow, reachable later through play
+      - squares cap+1..10 : red, unreachable, past the skill's cap
     with a tooltip per row explaining the same three numbers. Boosted
     skills (pips > 0) sort to the top; everything else (0 pips, capped at
     JOST.BaseCap0Pips) sorts below.
@@ -18,7 +18,7 @@
     (CharacterCreationProfession.lua itself assigns
     listboxXpBoost.doDrawItem = CharacterCreationProfession.drawXpBoostMap
     at listbox-creation time, which runs well after this file loads), so
-    replacing them here at load time is enough -- no need to also hook the
+    replacing them here at load time is enough, no need to also hook the
     listbox-creation function itself. Inside drawXpBoostMap, `self` is the
     listbox instance, not the screen (ISScrollingListBox calls
     self:doDrawItem(...)), matching vanilla's own code and
@@ -29,7 +29,7 @@ local SkillDefs = require("JOST_SkillDefs")
 local SkillCalc = require("JOST_SkillCalc")
 
 -- Matches CharacterCreationProfession.lua's own local UI_BORDER_SPACING
--- (10) and FONT_HGT_SMALL -- file-locals there, not globals, so they
+-- (10) and FONT_HGT_SMALL, file-locals there, not globals, so they
 -- aren't visible here. Same workaround JOST_CharCreationInfo.lua uses.
 local UI_BORDER_SPACING = 10
 local FONT_HGT_SMALL = getTextManager():getFontHeight(UIFont.Small)
@@ -45,7 +45,7 @@ local COLOR_RED = { r = 0.85, g = 0.15, b = 0.15 }
     objects, converted the same way JOST_SkillServer.lua's own trait
     checks do). Mirrors that file's "most conservative wins" priority
     order. Falls back to "default" on absolutely any failure, same as
-    picking no training trait -- this is a preview only, never
+    picking no training trait, this is a preview only, never
     authoritative (JOST_SkillServer.lua decides for real at spawn).
 ]]
 local function detectTrainingMode(screen)
@@ -91,7 +91,7 @@ function CharacterCreationProfession:checkXPBoost()
     self.listboxXpBoost:clear()
 
     -- Same XpBoosts-summing vanilla itself used here (see
-    -- JOST_SkillCalc.computeAllPipsFromDefinitions's comment) -- kept
+    -- JOST_SkillCalc.computeAllPipsFromDefinitions's comment), kept
     -- as-is rather than re-deriving it through that function, since the
     -- character-creation screen's own selected-trait items are already
     -- CharacterTraitDefinition objects (not the raw CharacterTrait

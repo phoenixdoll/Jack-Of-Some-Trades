@@ -38,7 +38,7 @@ ISSkillProgressBar.renderPerkRect = function(self)
     if cap < 0 then cap = 0 end
 
     -- Square index k (0-based) sits at x = k*(SKILL_POINT_HGT+SKILL_POINT_SPACING)
-    -- and represents level k+1 -- same layout renderPerkRect's own three
+    -- and represents level k+1, same layout renderPerkRect's own three
     -- loops already use. The first unreachable square is level cap+1, i.e.
     -- k = cap.
     local x = cap * (SKILL_POINT_HGT + SKILL_POINT_SPACING)
