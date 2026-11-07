@@ -59,6 +59,6 @@ ISSkillProgressBar.updateTooltip = function(self, lvlSelected)
 
     local cap = SkillCalc.getStoredEffectiveCap(self.char, perkName)
     if cap < SkillDefs.VANILLA_MAX_LEVEL and lvlSelected >= cap then
-        self.message = self.message .. " <LINE> SKILL CAP (" .. tostring(cap) .. ") -- CANNOT BE GAINED"
+        self.message = self.message .. " <LINE> SKILL CAP (" .. tostring(cap) .. ")"
     end
 end
