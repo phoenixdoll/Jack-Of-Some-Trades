@@ -162,7 +162,7 @@ end
 function SkillDefs.getBaseCap(pips)
     if pips >= 4 then return getSandboxVar("BaseCap4PlusPips", 10) end
     local byPips = {
-        [0] = getSandboxVar("BaseCap0Pips", 5),
+        [0] = getSandboxVar("BaseCap0Pips", 4),
         [1] = getSandboxVar("BaseCap1Pip", 5),
         [2] = getSandboxVar("BaseCap2Pips", 7),
         [3] = getSandboxVar("BaseCap3Pips", 9),

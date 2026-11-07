@@ -7,7 +7,7 @@ The number of pips you pick in a skill at character creation determines the maxi
 ```
        chosen  |
          pips  | cap
-            0  |  3
+            0  |  4
             1  |  5
             2  |  7
             3  |  9

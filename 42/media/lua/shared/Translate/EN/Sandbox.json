@@ -44,7 +44,7 @@
     "Sandbox_JOST_StartLevelDefault4PlusPips_tooltip": "Applies to every character who did NOT pick a training trait (the vast majority of players). Starting level granted for a trade skill with 4 or more pips of trait/profession investment. <LINE> Recommended: 7 -- keep lower than the matching Experienced-trait value above.",
 
     "Sandbox_JOST_BaseCap0Pips": "Max Level: 0 Pips",
-    "Sandbox_JOST_BaseCap0Pips_tooltip": "Maximum level a trade skill with no relevant trait/profession investment can reach, before any linked-skill bonus. <LINE> Recommended: 5",
+    "Sandbox_JOST_BaseCap0Pips_tooltip": "Maximum level a trade skill with no relevant trait/profession investment can reach, before any linked-skill bonus. <LINE> Recommended: 4",
 
     "Sandbox_JOST_BaseCap1Pip": "Max Level: 1 Pip",
     "Sandbox_JOST_BaseCap1Pip_tooltip": "Maximum level a trade skill with 1 pip of investment can reach, before any linked-skill bonus. <LINE> Recommended: 5",
