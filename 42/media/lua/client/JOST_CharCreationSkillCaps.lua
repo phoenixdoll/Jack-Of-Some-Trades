@@ -141,19 +141,15 @@ function CharacterCreationProfession:checkXPBoost()
             local pips = pipsByName[perkName]
             local startLevel = SkillCalc.getStartLevel(pips, trainingMode)
             local cap = SkillCalc.computeEffectiveCap(perkName, pipsByName)
+            local displayName = PerkFactory.getPerkName(perkType)
 
-            local tooltipLines = { "STARTING LEVEL: " .. startLevel }
-            if cap > startLevel then
-                table.insert(tooltipLines, "CAN STILL BE TRAINED, UP TO LEVEL " .. cap)
-            end
-            if cap < SkillDefs.VANILLA_MAX_LEVEL then
-                table.insert(tooltipLines, "SKILL CAP (" .. cap .. ") -- CANNOT BE GAINED")
-            end
+            local tooltip = "STARTING LEVEL: " .. startLevel ..
+                " <LINE> CAN TRAIN TO " .. cap .. " IN " .. displayName
 
             self.listboxXpBoost:addItem(
-                PerkFactory.getPerkName(perkType),
+                displayName,
                 { pips = pips, startLevel = startLevel, cap = cap },
-                table.concat(tooltipLines, " <LINE> ")
+                tooltip
             )
         end
     end
